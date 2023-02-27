@@ -191,7 +191,7 @@ class Com extends ChangeNotifier {
   ];
 
   void addComment(Comment com) {
-    comments.add(com);
+    comments.insert(0, com);
     notifyListeners();
   }
 
