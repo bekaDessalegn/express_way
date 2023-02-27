@@ -10,39 +10,51 @@ class AddCommentTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<Com>(
         builder: (context, data, child) {
-          return Container(
-            width: MediaQuery.of(context).size.width,
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: Colors.grey[300],
-            ),
-            child: Row(
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Expanded(
-                  child: TextField(
-                    controller: commentController,
-                    decoration: InputDecoration(
-                        labelText: "Add Comment",
-                        labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.black),
-                        border: InputBorder.none
+                SizedBox(height: 20,),
+                Row(
+                  children: [
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.asset("assets/images/p2.jpg", fit: BoxFit.cover, width: 40, height: 40,)),
+                    SizedBox(width: 10,),
+                    Expanded(
+                      child: TextField(
+                        controller: commentController,
+                        decoration: InputDecoration(
+                            hintText: "Share something Nardos Tamirat",
+                            hintStyle: TextStyle(fontSize: 14),
+                            border: OutlineInputBorder()
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
-                GestureDetector(
-                    onTap: (){
+                SizedBox(height: 10,),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.symmetric(horizontal: 25),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6)
+                      )
+                    ),
+                    onPressed: (){
                       data.addComment(Comment(
-                        date: "23/02/2023 at 04:30",
-                        firstName: "Beka D",
+                        date: "8",
+                        firstName: "Nardos Tamirat",
+                        imageUrl: "assets/images/p2.jpg",
                         like: 1,
+                        liked: false,
                         disLike: 3,
                         reply: [],
                         message:
                         commentController.text,
                       ));
-                    },
-                    child: Icon(Icons.send, size: 30))
+                    }, child: Text("Post"))
               ],
             ),
           );

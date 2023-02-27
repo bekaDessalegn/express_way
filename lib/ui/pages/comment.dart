@@ -32,21 +32,25 @@ class _CommentSectionState extends State<CommentSection> {
           return CupertinoPageScaffold(
             navigationBar: CupertinoNavigationBar(
               backgroundColor: Colors.white,
-              leading: CupertinoButton(
-                child: const Icon(
-                  Icons.arrow_back_ios_new_outlined,
-                  color: Color.fromARGB(255, 83, 83, 83),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              middle: const Text(
-                'Comments',
-                style: TextStyle(
-                  color: Color.fromARGB(255, 83, 83, 83),
-                  fontFamily: 'Red Hat Display',
-                  fontSize: 20,
+              // leading: CupertinoButton(
+              //   child: const Icon(
+              //     Icons.arrow_back_ios_new_outlined,
+              //     color: Color.fromARGB(255, 83, 83, 83),
+              //   ),
+              //   onPressed: () {
+              //     Navigator.pop(context);
+              //   },
+              // ),
+              leading: Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: const Text(
+                  'Comments',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 83, 83, 83),
+                    fontFamily: 'Red Hat Display',
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
                 ),
               ),
             ),
@@ -55,6 +59,7 @@ class _CommentSectionState extends State<CommentSection> {
                 height: MediaQuery.of(context).size.height-80,
                 child: Column(
                   children: [
+                    AddCommentTextFormField(),
                     Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
@@ -72,8 +77,11 @@ class _CommentSectionState extends State<CommentSection> {
                               children: [
                                 commentBox(comm: _comm, context: context, commentIndex: index),
                                 _comm.reply.length == 0 ? SizedBox() :
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                Container(
+                                  margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                                  decoration: BoxDecoration(
+                                    border: Border(left: BorderSide(color: Colors.grey))
+                                  ),
                                   child: ListView.builder(
                                     shrinkWrap: true,
                                     physics: BouncingScrollPhysics(),
@@ -86,7 +94,7 @@ class _CommentSectionState extends State<CommentSection> {
                                           left: 20,
                                           right: 10,
                                         ),
-                                        child: commentBox(comm: Comment(date: "26/02/2022 at 6:08", firstName: "Beka", like: 8, disLike: 7, reply: [], message: _reply), context: context, commentIndex: index),
+                                        child: commentBox(comm: Comment(date: "1", firstName: "Nardos Tamirat",imageUrl: "assets/images/p2.jpg", like: 8, liked: false, disLike: 7, reply: [], message: _reply), context: context, commentIndex: index),
                                       );
                                     },
                                   ),
@@ -97,8 +105,6 @@ class _CommentSectionState extends State<CommentSection> {
                         },
                       ),
                     ),
-                    Divider(thickness: 1.0,),
-                    AddCommentTextFormField()
                   ],
                 ),
               ),

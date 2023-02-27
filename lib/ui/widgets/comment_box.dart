@@ -10,28 +10,34 @@ Widget commentBox({required Comment comm, required BuildContext context, require
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Text("${comm.date} - ", style: TextStyle(
-                fontSize: 16,
-              color: Colors.black45
-            ),),
+            ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.asset(comm.imageUrl, fit: BoxFit.cover, width: 40, height: 40,)),
+            SizedBox(width: 10,),
             Text(comm.firstName, style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Colors.black
             ),),
+            SizedBox(width: 10,),
+            Expanded(
+              child: Text("${comm.date} month ago", overflow: TextOverflow.ellipsis, style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black45
+              ),),
+            ),
           ],
         ),
         SizedBox(height: 10,),
-        Text(comm.message,textAlign: TextAlign.left,style: TextStyle(fontSize: 16, color: Colors.black87)),
-        SizedBox(height: 10,),
+        Text(comm.message,textAlign: TextAlign.left,style: TextStyle(fontSize: 14, color: Colors.black87)),
+        SizedBox(height: 5,),
         Padding(
           padding: const EdgeInsets.only(right: 30.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset("assets/images/like.png", fit: BoxFit.cover, width: 30,  height: 30,),
-              Image.asset("assets/images/dislike.png", fit: BoxFit.cover, width: 30,  height: 30,),
-              Image.asset("assets/images/chat.png", fit: BoxFit.cover, width: 30,  height: 30,),
+              IconButton(onPressed: (){}, icon: Icon(Icons.thumb_up_alt_outlined, color: comm.liked ? Colors.blue : Colors.black,)),
+              SizedBox(width: 20,),
               Row(
                 children: [
                   GestureDetector(
@@ -40,12 +46,13 @@ Widget commentBox({required Comment comm, required BuildContext context, require
                           return replyDialog(commentIndex: commentIndex);
                         });
                       },
-                      child: Image.asset("assets/images/reply.png", fit: BoxFit.cover, width: 30,  height: 30,)),
-                  SizedBox(width: 5,),
-                  comm.reply.length == 0 ? SizedBox() : Text(comm.reply.length.toString(), style: TextStyle(fontSize: 18),)
+                      child: Text("Reply")),
+                  // SizedBox(width: 5,),
+                  // comm.reply.length == 0 ? SizedBox() : Text(comm.reply.length.toString(), style: TextStyle(fontSize: 18),)
                 ],
               ),
-              Image.asset("assets/images/caution.png", fit: BoxFit.cover, width: 30,  height: 30,),
+              SizedBox(width: 20,),
+              Text("Report"),
             ],
           ),
         )

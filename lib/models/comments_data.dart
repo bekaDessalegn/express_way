@@ -10,7 +10,9 @@ import 'package:flutter/material.dart';
 class Comment {
   late final String date;
   late final String firstName;
+  late final String imageUrl;
   late final int like;
+  late final bool liked;
   late final int disLike;
   late final List<String> reply;
   late final String message;
@@ -18,7 +20,9 @@ class Comment {
   Comment({
     required this.date,
     required this.firstName,
+    required this.imageUrl,
     required this.like,
+    required this.liked,
     required this.disLike,
     required this.reply,
     required this.message,
@@ -111,60 +115,74 @@ class Comment {
 class Com extends ChangeNotifier {
   List<Comment> comments = [
     Comment(
-      date: "27/01/2022 at 04:30",
-      firstName: "Naol",
+      date: "3",
+      firstName: "Naol Girma",
+      imageUrl: "assets/images/p1.jpg",
       like: 5,
+      liked: true,
       disLike: 7,
       reply: [],
       message:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum, odio semper placerat efficitur, augue nibh dictum lectus, at ultricies justo dolor non orci.",
     ),
     Comment(
-      date: "12/06/2020 at 12:30",
-      firstName: "Naol",
+      date: "7",
+      firstName: "Naol Girma",
+      imageUrl: "assets/images/p1.jpg",
       like: 6,
+      liked: false,
       disLike: 9,
       reply: [],
       message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis.",
     ),
     Comment(
-      date: "27/01/2022 at 04:30",
-      firstName: "Naol",
+      date: "5",
+      firstName: "Naol Girma",
+      imageUrl: "assets/images/p1.jpg",
       like: 7,
+      liked: true,
       disLike: 0,
       reply: [],
       message:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum, odio semper placerat efficitur, augue nibh dictum lectus, at ultricies justo dolor non orci.",
     ),
     Comment(
-      date: "27/01/2022 at 04:30",
-      firstName: "Naol",
+      date: "8",
+      firstName: "Naol Girma",
+      imageUrl: "assets/images/p1.jpg",
       like: 8,
+      liked: true,
       disLike: 1,
       reply: [],
       message:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis bibendum, odio semper placerat efficitur, augue nibh dictum lectus, at ultricies justo dolor non orci.",
     ),
     Comment(
-      date: "12/06/2020 at 12:30",
-      firstName: "Naol",
+      date: "9",
+      firstName: "Naol Girma",
+      imageUrl: "assets/images/p1.jpg",
       like: 6,
+      liked: false,
       disLike: 9,
       reply: [],
       message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis.",
     ),
     Comment(
-      date: "12/06/2020 at 12:30",
-      firstName: "Naol",
+      date: "2",
+      firstName: "Naol Girma",
+      imageUrl: "assets/images/p1.jpg",
       like: 6,
+      liked: false,
       disLike: 9,
       reply: [],
       message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis.",
     ),
     Comment(
-      date: "27/01/2022 at 04:30",
-      firstName: "Naol",
+      date: "1",
+      firstName: "Naol Girma",
+      imageUrl: "assets/images/p1.jpg",
       like: 1,
+      liked: true,
       disLike: 3,
       reply: [],
       message:
@@ -179,6 +197,11 @@ class Com extends ChangeNotifier {
 
   void addReply(String reply, int index) {
     comments[index].reply.add(reply);
+    notifyListeners();
+  }
+
+  void likeComment(int index) {
+    comments[index].liked = !comments[index].liked;
     notifyListeners();
   }
 }
